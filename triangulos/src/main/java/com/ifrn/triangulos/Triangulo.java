@@ -1,8 +1,8 @@
 package com.ifrn.triangulos;
 
 /**
- * Verifica Triangulo de acordo com
- * suas propriedades. 
+ * Classifica um triângulo de acordo com as
+ * propriedades de tamanho das retas. 
  * */
 public class Triangulo
 {
@@ -12,11 +12,18 @@ public class Triangulo
 
   Triangulo( int a, int b, int c )
   {
-    this.la = a;
-    this.lb = b;
-    this.lc = c;
-    if ( this.eTriangulo() == false )
-      System.out.println( "ESTA PORRA NÃO É UM Triangulo" );
+    this.la = Math.abs(a);
+    this.lb = Math.abs(b);
+    this.lc = Math.abs(c);
+  }
+
+  /* Retorna o maior lado de um triângulo */
+  protected char maiorLado()
+  {
+    if( this.la > this.lb && this.la > this.lc ) return 'a';
+    else if( this.lb > this.la && this.lb > this.lc ) return 'b';
+    else if( this.lc > this.la && this.lc > this.lb ) return 'c';
+    else return '*'; //todos os lados iguais (equilátero)
   }
 
   /* triângulos só são possíveis se todas
@@ -25,69 +32,72 @@ public class Triangulo
    * c+a não pode ser <= b
    * b+c não pode ser <= a
    * */
-  protected boolean eTriangulo()
+  public boolean eTriangulo()
   {
-    if( (this.la + this.lb) <= this.lc ||
-        (this.lc + this.la) <= this.lb ||
-        (this.lb + this.lc) <= this.la
-      )
+    char ml = this.maiorLado();
+    // descubra qual é o maior lado
+    switch( ml )
     {
-      return false;
+      case 'a':
+        if ( (this.lb + this.lc) <= this.la )
+          return false;
+        break;
+      case 'b':
+        if ( (this.lc + this.la) <= this.lb )
+          return false;
+        break;
+      case 'c':
+        if ( (this.la + this.lb) <= this.lc )
+          return false;
+        break;
+      case '*':
+        return true;
     }
     return true;
   }
 
   //se a = b e c = b então a=b=c
-  protected boolean eEquilatero()
+  public boolean eEquilatero()
   {
-    this.eTriangulo();
+    if ( this.eTriangulo() == false ) return false;
+
     if ( this.la == this.lb && this.lc == this.lb )
     {
-      System.out.println( "É equilátero" );
       return true;
     }
-    System.out.println( "Não é equilátero" );
     return false;
   }
 
   /* Dois lados iguais e um diferente.
-   *eq diff
-    ab c
-    ca b
-    bc a
-   */
-  protected boolean eIsoceles()
+   * (ab)c, (ca)b, (bc)a */
+  public boolean eIsoceles()
   {
-    this.eTriangulo();
+    if ( this.eTriangulo() == false ) return false;
+
     if      ( this.la == this.lb && (this.lc != this.la) )
     {
-      System.out.println( "É isoceles" );
       return true;
     }
     else if ( this.lc == this.la && (this.lb != this.lc) )
     {
-      System.out.println( "É isoceles" );
       return true;
     }
     else if ( this.lb == this.lc && (this.la != this.lb) )
     {
-      System.out.println( "É isoceles" );
       return true;
     }
-    System.out.println( "Não é isoceles" );
     return false;
   }
 
   /* ab,ba ac,ca bc,cb propriedade comutativa */
-  protected boolean eEscaleno()
+  public boolean eEscaleno()
   {
-    this.eTriangulo();
+    if ( this.eTriangulo() == false ) return false;
+
     if ( this.la != this.lb && this.la != this.lc && this.lb != this.lc )
     {
-      System.out.println( "É escaleno" );
       return true;
     }
-    System.out.println( "Não é escaleno" );
     return false;
   }
 
@@ -105,10 +115,9 @@ public class Triangulo
         this.eIsoceles();
         break;
       default:
-        this.eEquilatero();
+        return;
     }
   }
-  
 };
 
 

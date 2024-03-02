@@ -7,7 +7,7 @@ public class ContaCorrente
 {
 
   String idCliente;
-  int saldo;
+  float saldo;
 
   public ContaCorrente( ContaCorrente[] contas )
   {
@@ -26,7 +26,7 @@ public class ContaCorrente
     for( int i = 0; i < contas.length; i++ )
     {
       if ( contas[i] == null ) continue;
-      else if ( contas[i].idCliente == idCliente ) return contas[i].idCliente;
+      else if ( contas[i].idCliente.equals( idCliente ) ) return contas[i].idCliente;
     }
     return "-1";
   }
@@ -70,9 +70,10 @@ public class ContaCorrente
     if ( quantia <= this.saldo )
     {
       this.saldo -= quantia;
+      System.out.printf("Sacaste %f\n", quantia );
       return quantia;
     }
-    System.out.printf( "\n teu saldo é de %f, logo não podes sacar %f", this.saldo, quantia );
+    System.out.printf( "teu saldo é de %f, logo não podes sacar %f\n", this.saldo, quantia );
     return 0;
   }
 
@@ -81,8 +82,10 @@ public class ContaCorrente
     if ( quantia > 0 )
     {
       this.saldo += quantia;
+      System.out.printf("Depositaste %f\n", quantia );
+      return;
     }
-    System.out.printf( "\n não podes depositar 0 reais ou valor negativo TROUXA!" );
+    System.out.printf( "não podes depositar 0 reais ou valor negativo.\n" );
   }
 
   public void transferir( float quantia, ContaCorrente[] contas, String idAlvo )
@@ -96,9 +99,15 @@ public class ContaCorrente
       int alvo = this.retornarPosicaoDoAlvo( contas, idAlvo );
       contas[ alvo ].depositar( quantia );
       this.saldo -= quantia;
-      System.out.printf( "Tranferiste %f para a conta %s", quantia, contas[ alvo ].idCliente );
+      System.out.printf( "Tranferiste %f para a conta %s\n", quantia, contas[ alvo ].idCliente );
     }
-    System.out.printf( "A conta '%s' não foi encontrada. TRANSFERÊNCIA ABORTADA", idAlvo );
+    System.out.printf( "A conta '%s' não foi encontrada. TRANSFERÊNCIA ABORTADA\n", idAlvo );
   }
+
+  public void visualizar()
+  {
+    System.out.printf( "%f\n", this.saldo );
+  }
+
 };
 

@@ -36,10 +36,10 @@ public class CaixaEletronico
   {
     System.out.println( "****** SOFTWARE BANCÁRIO JAVEIRO ******\n\n" );
       System.out.println( "===================" );
-      System.out.printf(  "OLÁ %s", credencialAcesso );
       System.out.println( " 1.Sacar" );
       System.out.println( " 2.Depositar" );
       System.out.println( " 3.Transferir" );
+      System.out.println( " 4.Visualizar" );
       System.out.println( "===================" );
     
   }
@@ -58,11 +58,11 @@ public class CaixaEletronico
   protected int login()
   {
     this.exibirListaDeContas();
-    String id = this.sc.nextLine();
+    String id = this.sc.next();
     
     for( int i = 0; i < this.contas.length; i++ )
     {
-      if( id == this.contas[i].idCliente )
+      if( this.contas[i].idCliente.equals( id ) )
       {
         return i;
       }
@@ -93,17 +93,24 @@ public class CaixaEletronico
       switch( opt )
       {
         case "1":
+          System.out.println( "quantia>" );
           quantia = this.sc.nextFloat();
           contas[credencialAcesso].sacar( quantia );
           break;
         case "2":
+          System.out.println( "quantia>" );
           quantia = this.sc.nextFloat();
           contas[credencialAcesso].depositar( quantia );
           break;
         case "3":
+          System.out.println( "quantia>" );
           quantia = this.sc.nextFloat();
+          System.out.println( "alvo>" );
           alvo = this.sc.next();
           contas[credencialAcesso].transferir( quantia, this.contas, alvo );
+          break;
+        case "4":
+          contas[credencialAcesso].visualizar();
           break;
         default:
           System.out.println( "NOP" );
