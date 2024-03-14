@@ -6,7 +6,7 @@
 </p>
 
 <p>
-    A estrutura das aplicações foram geradas pela
+    A estrutura das aplicações JAVA© foram geradas pela
     ferramenta cli maven com um comando semelhante a:
 </p>
 
@@ -23,5 +23,16 @@ $ mvn \
 #compilação
 $ javac -d dir/ main.java a.java b.java
 
+```
+
+<p>
+    Aplicações javascript nodejs foram incializadas
+    pelo comando cli `npm init`.
+    Posteriores instalações de bibliotecas e frameworks
+    explicados em cada projeto javascript.
+</p>
+
+```
+$ npm init
 ```
 

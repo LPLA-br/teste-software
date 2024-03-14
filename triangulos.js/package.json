@@ -1,0 +1,14 @@
+{
+  "name": "triangulos",
+  "version": "0.0.1",
+  "description": "teste de funcoes de triangulo com jest",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "LPLA-br",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
