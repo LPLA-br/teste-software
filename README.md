@@ -20,10 +20,32 @@ $ mvn \
     -DarchetypeVersion=1.4 \
     -DinteractiveMode=true
 
-#compilação
+#compilação manual
 $ javac -d dir/ main.java a.java b.java
 
 ```
+
+<p>
+    ciclo de vida da construção do projeto com o maven
+    FONTE: <a href="https://maven.apache.org/"> maven </a>
+</p>
+
+<ul>
+    <li> validate - verifica correção do projeto </li>
+    <li> compile - compila o código fonte </li>
+    <li> test - testa código fonte compilado usando framework de teste </li>
+    <li> package - fonte compilado para pacote distribuível </li>
+    <li> verify - executa checagens nos resultados dos testes de integração </li>
+    <li>
+        install - instala pacote no repositório local para uso como dependência
+        em outros projetos localmente.
+    </li>
+    <li> deploy - copia pacote final para o repositório remoto </li>
+</ul>
+
+<hr>
+
+<p> Projetos javascript neste repositório: </p>
 
 <p>
     Aplicações javascript nodejs foram incializadas

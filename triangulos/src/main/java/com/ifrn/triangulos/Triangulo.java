@@ -17,7 +17,9 @@ public class Triangulo
     this.lc = Math.abs(c);
   }
 
-  /* Retorna o maior lado de um triângulo */
+  /** Retorna o maior lado de um triângulo real.
+   * @return  lado  caractere indicador de lado.
+   * */
   protected char maiorLado()
   {
     if( this.la > this.lb && this.la > this.lc ) return 'a';
@@ -26,11 +28,11 @@ public class Triangulo
     else return '*'; //todos os lados iguais (equilátero)
   }
 
-  /* triângulos só são possíveis se todas
-   * as retas componentes se alcancam pelas as pontas
-   * a+b não pode ser <= c
-   * c+a não pode ser <= b
-   * b+c não pode ser <= a
+  /**
+   * Verifica se os valores apontam para um triângulo possível
+   * onde a soma de dois lados não é menor que ou igual ao do
+   * terceiro.
+   * @return  identidade  booleano se é ou não triângulo.
    * */
   public boolean eTriangulo()
   {
@@ -56,7 +58,11 @@ public class Triangulo
     return true;
   }
 
-  //se a = b e c = b então a=b=c
+  /**
+   * Verifica se triângulo tem os três lados iguais de forma
+   * que seja equilátero.
+   * @return identidade booleano se é ou não equilatero.
+   * */
   public boolean eEquilatero()
   {
     if ( this.eTriangulo() == false ) return false;
@@ -68,8 +74,11 @@ public class Triangulo
     return false;
   }
 
-  /* Dois lados iguais e um diferente.
-   * (ab)c, (ca)b, (bc)a */
+  /**
+   * Verifica se se dois lados tem valores iguais e um diferente
+   * independentemente da posição do maior lado.
+   * @return  identidade  booleano se é ou não isoceles.
+   * */
   public boolean eIsoceles()
   {
     if ( this.eTriangulo() == false ) return false;
@@ -89,7 +98,11 @@ public class Triangulo
     return false;
   }
 
-  /* ab,ba ac,ca bc,cb propriedade comutativa */
+  /**
+   * Verifica se os três lados do triâgulo têm diferentes valores
+   * não violando codições anteriores e indicando escalenidade.
+   * @return  identidade  booleano se é ou não escaleno.
+  */
   public boolean eEscaleno()
   {
     if ( this.eTriangulo() == false ) return false;
@@ -101,23 +114,16 @@ public class Triangulo
     return false;
   }
 
-  public void verificarTipo( String tipo )
+  /** Altera valores dos lados do objeto.
+   * */
+  public void setLados( int a, int b, int c )
   {
-    switch( tipo )
-    {
-      case "equilatero":
-        this.eEquilatero();
-        break;
-      case "isoceles":
-        this.eEscaleno();
-        break;
-      case "escaleno":
-        this.eIsoceles();
-        break;
-      default:
-        return;
-    }
+    this.a = a;
+    this.b = b;
+    this.c = c;
   }
+
+  // Método verificar tipo removido.
 };
 
 
