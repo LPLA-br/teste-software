@@ -1,6 +1,6 @@
 package com.ifrn.triangulos;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
@@ -11,11 +11,11 @@ import com.ifrn.triangulos.Triangulo;
  * Teste de unidade
  * Métodos da classe Triangulo.
  */
-public class TriangulosTest
+public class TrianguloTest
 {
-    Triangulo t;
+    protected Triangulo t;
 
-    TriangulosTest()
+    public TrianguloTest()
     {
       this.t = new Triangulo( 10,10,10 );
     }
@@ -75,7 +75,7 @@ public class TriangulosTest
     public void maiorLado()
     {
       this.t.setLados( 10,10,10 );
-      assertEquals( '*' , this.t.maiorLado(); );
+      assertEquals( '*' , this.t.maiorLado() );
     }
 
     /**

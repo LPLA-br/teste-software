@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: com.ifrn.triangulos.TrianguloTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.1 s <<< FAILURE! - in com.ifrn.triangulos.TrianguloTest
+equilatero(com.ifrn.triangulos.TrianguloTest)  Time elapsed: 0.017 s  <<< FAILURE!
+java.lang.AssertionError: expected:<true> but was:<false>
+	at com.ifrn.triangulos.TrianguloTest.equilatero(TrianguloTest.java:91)
+
+triangulo(com.ifrn.triangulos.TrianguloTest)  Time elapsed: 0 s  <<< FAILURE!
+java.lang.AssertionError: expected:<true> but was:<false>
+	at com.ifrn.triangulos.TrianguloTest.triangulo(TrianguloTest.java:36)
+

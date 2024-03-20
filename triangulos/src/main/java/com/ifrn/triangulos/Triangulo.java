@@ -6,9 +6,9 @@ package com.ifrn.triangulos;
  * */
 public class Triangulo
 {
-  int la;
-  int lb;
-  int lc;
+  protected int la;
+  protected int lb;
+  protected int lc;
 
   Triangulo( int a, int b, int c )
   {
@@ -36,6 +36,8 @@ public class Triangulo
    * */
   public boolean eTriangulo()
   {
+    if ( this.la == 0 && this.lb == 0 && this.lc == 0 ) return false;
+
     char ml = this.maiorLado();
     // descubra qual é o maior lado
     switch( ml )
@@ -118,9 +120,9 @@ public class Triangulo
    * */
   public void setLados( int a, int b, int c )
   {
-    this.a = a;
-    this.b = b;
-    this.c = c;
+    this.la = a;
+    this.lb = b;
+    this.lc = c;
   }
 
   // Método verificar tipo removido.
