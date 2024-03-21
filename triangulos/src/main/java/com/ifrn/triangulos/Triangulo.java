@@ -120,9 +120,9 @@ public class Triangulo
    * */
   public void setLados( int a, int b, int c )
   {
-    this.la = a;
-    this.lb = b;
-    this.lc = c;
+    this.la = Math.abs(a);
+    this.lb = Math.abs(b);
+    this.lc = Math.abs(c);
   }
 
   // Método verificar tipo removido.
