@@ -2,6 +2,7 @@
 package com.ifrn.intro;
 
 import java.util.Random;
+import com.ifrn.intro.ContasUtil;
 
 public class ContaCorrente
 {
@@ -9,62 +10,15 @@ public class ContaCorrente
   String idCliente;
   float saldo;
 
+  ContasUtil contasUtil;
+
   public ContaCorrente( ContaCorrente[] contas )
   {
-    this.idCliente = this.gerarId( contas );
+    this.contasUtil = new ContasUtil();
+    this.idCliente = this.contasUtil.gerarId( contas );
     this.saldo = 0;
   }
-
-  /*
-   * @return idTextual da conta corrente alvo ou uma não conta na forma "-1"
-   * */
-  protected String buscaSequencial( ContaCorrente[] contas, String idCliente )
-  {
-    if ( contas.length == 0 ) return "-1";
-    /*se a matriz de contas for ordenada alfabeticamente pelo idCliente
-      será possível aplicar busca binária ao invés da busca sequêncial abaixo*/
-    for( int i = 0; i < contas.length; i++ )
-    {
-      if ( contas[i] == null ) continue;
-      else if ( contas[i].idCliente.equals( idCliente ) ) return contas[i].idCliente;
-    }
-    return "-1";
-  }
-
-  /*
-   * @return número de posição da conta alvo ou uma não conta -1
-   * */
-  protected int retornarPosicaoDoAlvo( ContaCorrente[] contas, String idAlvo )
-  {
-    int posicao = -1;
-    for ( int i = 0; i< contas.length; i++ )
-    {
-      if ( contas[i].idCliente == idAlvo )
-      {
-        posicao = i;
-        break;
-      }
-    }
-    return posicao;
-  }
-
-  // gerarId para criação de conta aleatóriamente.
-  protected String gerarId( ContaCorrente[] contas )
-  {
-    Random r = new Random();
-
-    while( true )
-    {
-      int res = (r.nextInt(1,9999)+1);
-
-      String jaExiste = this.buscaSequencial( contas, Integer.toString( res ) );
-
-      if ( jaExiste == "-1" )
-        return Integer.toString( res );
-      else continue;
-    }
-  }
-
+ 
   public float sacar( float quantia )
   {
     if ( quantia <= this.saldo )
@@ -90,16 +44,24 @@ public class ContaCorrente
 
   public void transferir( float quantia, ContaCorrente[] contas, String idAlvo )
   {
-    String existe = this.buscaSequencial( contas, idAlvo );
+    String existe = this.contasUtil.buscaSequencial( contas, idAlvo );
 
     if ( existe == "-1" ) System.out.println( "Não foi possível encontrar a conta com id especificado" );
 
     if ( quantia <= this.saldo )
     {
-      int alvo = this.retornarPosicaoDoAlvo( contas, idAlvo );
+      int alvo = this.contasUtil.retornarPosicaoDoAlvo( contas, idAlvo );
+
+      if ( alvo == -1 )
+      {
+        System.out.printf("Não foi possível alcancar usuário solicitado");
+        return;
+      }
+
       contas[ alvo ].depositar( quantia );
       this.saldo -= quantia;
       System.out.printf( "Tranferiste %f para a conta %s\n", quantia, contas[ alvo ].idCliente );
+      return;
     }
     System.out.printf( "A conta '%s' não foi encontrada. TRANSFERÊNCIA ABORTADA\n", idAlvo );
   }
