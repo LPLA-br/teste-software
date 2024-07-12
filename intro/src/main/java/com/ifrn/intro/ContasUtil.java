@@ -1,8 +1,9 @@
 package com.ifrn.intro;
 
 import java.util.Random;
+import com.ifrn.intro.IContasUtil;
 
-public class ContasUtil
+public class ContasUtil implements IContasUtil
 {
 
   ContasUtil()
@@ -11,7 +12,7 @@ public class ContasUtil
   /*
    * @return idTextual da conta corrente alvo ou uma não conta na forma "-1"
    * */
-  protected String buscaSequencial( ContaCorrente[] contas, String idCliente )
+  public String buscaSequencial( ContaCorrente[] contas, String idCliente )
   {
     if ( contas.length == 0 ) return "-1";
     /*se a matriz de contas for ordenada alfabeticamente pelo idCliente
@@ -27,7 +28,7 @@ public class ContasUtil
   /*
    * @return número de posição da conta alvo ou uma não conta -1
    * */
-  protected int retornarPosicaoDoAlvo( ContaCorrente[] contas, String idAlvo )
+  public int retornarPosicaoDoAlvo( ContaCorrente[] contas, String idAlvo )
   {
     int posicao = -1;
     for ( int i = 0; i< contas.length; i++ )
@@ -42,7 +43,7 @@ public class ContasUtil
   }
 
   // gerarId para criação de conta aleatóriamente.
-  protected String gerarId( ContaCorrente[] contas )
+  public String gerarId( ContaCorrente[] contas )
   {
     Random r = new Random();
 

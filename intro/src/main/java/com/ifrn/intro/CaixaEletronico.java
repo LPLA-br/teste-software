@@ -3,6 +3,7 @@ package com.ifrn.intro;
 
 import java.util.Scanner;
 import com.ifrn.intro.ContaCorrente;
+import com.ifrn.intro.ContasUtil;
 
 public class CaixaEletronico
 {
@@ -50,7 +51,7 @@ public class CaixaEletronico
     //instanciação de objeto para cada posição da matriz alocada pelo java.
     for( int i = 0; i < this.contas.length; i++ )
     {
-      this.contas[i] = new ContaCorrente( this.contas );
+      this.contas[i] = new ContaCorrente( this.contas, new ContasUtil() );
     }
   }
 

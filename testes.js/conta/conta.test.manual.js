@@ -1,4 +1,4 @@
-// Não executar com jest
+/* Testes unitários manuais sem jest */
 
 const conta = require('./conta');
 let contas = [];

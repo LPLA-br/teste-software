@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+	<head>
+		<meta charset="utf-8">
+		<meta name="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Template de página html">
+		<link rel="stylesheet" href="./css/style.css">
+		<title> Cadastro </title>
+	</head>
+	<body>
+		<header>
+			<h1> Cadastro </h1>
+		</header>
+
+
+    <main>
+      <form>
+        <input id="nome" type="text" placeholder="nome"/>
+        <input id="email" type="email" placeholder="email"/>
+        <input id="senha" type="password" placeholder="senha" minlength="10"/>
+        <input id="cadastrar" type="button" value="cadastrar-me" onclick="cadastrare()" />
+      </form>
+      <div>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Earth-spinning-rotating-animation-40.gif" alt="terra_fisica" />
+      </div>
+      <div>
+        <small>
+          <p>
+            abra o console do navegador e execute a função
+            "testeUnitarioSemiManual()" para obter os
+            resultados aferíveis manualmente.
+          </p>
+        </small>
+      </div>
+    </main>
+
+		<script type="text/javascript">
+
+      let memoriaVolatil = [];
+
+      const nome = document.querySelector("#nome");
+      const email = document.querySelector("#email");
+      const senha = document.querySelector("#senha");
+
+      function cadastrare()
+      {
+        if ( verificarCamposVazios() == false )
+        {
+          return;
+        }
+        else if ( verificarTentativaRecadastro() == false )
+        {
+          return;
+        }
+
+        memoriaVolatil.push( {
+          nome: nome.value,
+          email: email.value,
+          senha: senha.value
+        } );
+      }
+
+      /*retorna true para sucesso e false para falha*/
+      function verificarCamposVazios()
+      {
+        let mensagem = "";
+        let exibir = false;
+
+        if ( nome.value == "" )
+        {
+          mensagem = mensagem.concat( "Campo nome vazio !\n" );
+          exibir = true;
+        }
+        if ( email.value == "" )
+        {
+          mensagem = mensagem.concat("Campo email vazio !\n");
+          exibir = true;
+        }
+        if ( senha.value == "" )
+        {
+          mensagem = mensagem.concat("Campo senha vazio !\n");
+          exibir = true;
+        }
+        if ( exibir == true )
+        {
+          window.alert( mensagem );
+          return false;
+        }
+      }
+
+      function limparCampos()
+      {
+        nome.value = "";
+        email.value = "";
+        senha.value = "";
+      }
+
+      /*retorna true para sucesso e false para falha*/
+      function verificarTentativaRecadastro()
+      {
+        for( let i = 0; i < memoriaVolatil.length; i++ )
+        {
+          if ( nome.value == memoriaVolatil[i].nome )
+          {
+            window.alert( "ERRO: nome já existe no sistema!\n" );
+            limparCampos();
+            return false;
+          }
+          if ( email.value == memoriaVolatil[i].email )
+          {
+            window.alert( "ERRO: email já existe no sistema!\n" );
+            limparCampos();
+            return false;
+          }
+        }
+        return true;
+      }
+
+      /*resultados são aferidos e documentados*/
+      function testeUnitarioSemiManual()
+      {
+        const reset = ()=>
+        {
+          nome.value = "Jorge";
+          email.value = "Jorge@example.com";
+          senha.value = "1234567890";
+        }
+
+        const resetMemoria = (mem)=>
+        {
+          for ( let i = 0; i < mem.length; i++ )
+          {
+            mem.pop();
+          }
+        }
+
+        //##########################################
+
+        console.log("CADASTRO NORMAL COMPLETO {");
+
+          limparCampos();
+          nome.value = "Gerônio";
+          email.value = "Ger@foo.com";
+          senha.value = "70fugir20lascar";
+          cadastrare();
+          console.log( memoriaVolatil );
+          resetMemoria(memoriaVolatil);
+
+
+        console.log("}\n\n");
+        console.log("CAMPOS OBRIGATÓRIOS {");
+          console.log("Merciolinda tenta cadastrar-se de forma indevida:");          
+
+          console.log("senha ausente:");
+          limparCampos();
+          nome.value = "Merciolinda";
+          email.value = "Merci@gmolho.com";
+          cadastrare();
+          console.log( memoriaVolatil );
+          resetMemoria(memoriaVolatil);
+
+          console.log("email ausente:");
+          limparCampos();
+          nome.value = "Merciolinda";
+          senha.value = "Moluqkis4545";
+          cadastrare();
+          console.log( memoriaVolatil );
+          resetMemoria(memoriaVolatil);
+
+          console.log("nome ausente:");
+          limparCampos();
+          email.value = "Merci@gmolho.com";
+          senha.value = "Moluqkis4545";
+          cadastrare();
+          console.log( memoriaVolatil );
+          resetMemoria(memoriaVolatil);
+
+          console.log("tudo ausente:");
+          limparCampos();
+          cadastrare();
+          console.log( memoriaVolatil );
+          resetMemoria(memoriaVolatil);
+
+        console.log("}\n\n");
+
+        console.log("TENTATIVA DE RECADASTRO {");
+          resetMemoria(memoriaVolatil);
+
+          console.log("Jorge cadastra-se:");
+          reset();
+          cadastrare();
+
+          console.log("Jorge recadastra-se:");
+          reset();
+          cadastrare();
+
+          console.log("Jorge recadastra-se denovo:");
+          reset();
+          cadastrare();
+
+          console.log( memoriaVolatil ); 
+
+        console.log("}\n\n");
+
+        console.log("TENTATIVA DE DUPLICAÇÃO DE REGISTRO NOME E EMAIL {");
+
+          console.log("Conta oficial de jorge cadastrada.");
+          resetMemoria(memoriaVolatil);
+          reset();
+          cadastrare();
+
+          console.log("Anonymus tenta clonar nome:");
+          limparCampos();
+          nome.value = "Jorge";
+          email.value = "foo@bar.com";
+          senha.value = "Malevolencia666";
+          cadastrare();
+          console.log( memoriaVolatil ); 
+
+          console.log("Anonymus tenta clonar email:");
+          limparCampos();
+          nome.value = "Anonymus";
+          email.value = "Jorge@example.com";
+          senha.value = "Malevolencia666";
+          cadastrare();
+          console.log( memoriaVolatil ); 
+
+          console.log("Anonymus tenta clonar email e nome:");
+          limparCampos();
+          nome.value = "Jorge";
+          email.value = "Jorge@example.com";
+          senha.value = "Malevolencia666";
+          cadastrare();
+          console.log( memoriaVolatil ); 
+
+
+        console.log("}\n\n");
+        console.log("FIM DOS TESTES SEMI MANUAIS");
+
+      }
+
+    </script>
+
+	</body>
+</html>

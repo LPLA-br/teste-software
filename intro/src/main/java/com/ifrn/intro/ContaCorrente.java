@@ -1,7 +1,7 @@
-// conta
 package com.ifrn.intro;
 
 import java.util.Random;
+import com.ifrn.intro.IContasUtil;
 import com.ifrn.intro.ContasUtil;
 
 public class ContaCorrente
@@ -10,11 +10,12 @@ public class ContaCorrente
   String idCliente;
   float saldo;
 
-  ContasUtil contasUtil;
+  IContasUtil contasUtil;
 
-  public ContaCorrente( ContaCorrente[] contas )
+  public ContaCorrente( ContaCorrente[] contas, IContasUtil contasUtil )
   {
-    this.contasUtil = new ContasUtil();
+    this.contasUtil = contasUtil;
+
     this.idCliente = this.contasUtil.gerarId( contas );
     this.saldo = 0;
   }
