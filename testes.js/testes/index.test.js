@@ -5,7 +5,7 @@
  * NOTA: números negativos são convertidos em números positivos.
  * */
 
-const tri = require( './index' );
+const tri = require( '../triangulos/index' );
 
 //testes a parte.
 
